@@ -28,9 +28,11 @@
 %% Afterwards you need to run makebatches.m every time before you run this 
 %%     in order to create the batchdata 3-dimentional array in memory
 %% You also probably want to enter "more off" in order to turn off paging
+%% You can get the first mini-batch (of 100 digits) with data = batchdata(1,:)
+%% You can display then the first 8 of those digits with mnistdisp(data(1:8,:)')
 
-maxepoch = 10
-numhid = 200
+maxepoch = 4
+numhid = 50
 restart = 1
 
 epsilonw      = 0.1;   % Learning rate for weights 
@@ -41,6 +43,7 @@ initialmomentum  = 0.5;
 finalmomentum    = 0.9;
 
 [numcases numdims numbatches]=size(batchdata);
+%% [ 100 784 600 ]
 
 if restart ==1,
   restart=0;
@@ -117,4 +120,4 @@ for epoch = epoch:maxepoch,
   fprintf(1, 'epoch %4i error %6.1f  secs:%6.1f \n', epoch, errsum, elap); 
 end;
 totelap = etime (clock (), starttrain);
-fprintf(1, 'finalerror %6.1f  total secs:%6.1f \n', errsum, totelap); 
+fprintf(1, 'final-error %6.1f  total secs:%6.1f \n', errsum, totelap); 
